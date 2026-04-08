@@ -18,9 +18,27 @@ def test_resolve_slot_afternoon() -> None:
     assert resolve_slot(now_local, date(2026, 4, 11)) is SlotName.AFTERNOON
 
 
+def test_resolve_slot_before_target_date_returns_morning_before_noon() -> None:
+    timezone_info = ZoneInfo("Europe/Paris")
+    now_local = datetime(2026, 4, 10, 2, 0, tzinfo=timezone_info)
+    assert resolve_slot(now_local, date(2026, 4, 11)) is SlotName.MORNING
+
+
+def test_resolve_slot_before_target_date_returns_afternoon_after_noon() -> None:
+    timezone_info = ZoneInfo("Europe/Paris")
+    now_local = datetime(2026, 4, 10, 22, 0, tzinfo=timezone_info)
+    assert resolve_slot(now_local, date(2026, 4, 11)) is SlotName.AFTERNOON
+
+
 def test_resolve_slot_out_of_window() -> None:
     timezone_info = ZoneInfo("Europe/Paris")
     now_local = datetime(2026, 4, 11, 19, 0, tzinfo=timezone_info)
+    assert resolve_slot(now_local, date(2026, 4, 11)) is None
+
+
+def test_resolve_slot_after_target_date_returns_none() -> None:
+    timezone_info = ZoneInfo("Europe/Paris")
+    now_local = datetime(2026, 4, 12, 10, 0, tzinfo=timezone_info)
     assert resolve_slot(now_local, date(2026, 4, 11)) is None
 
 

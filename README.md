@@ -5,8 +5,10 @@ Surveillance météo horaire de **Saint-Chamond (42400)** sur la date cible `202
 Règle d’alerte:
 
 - créneaux `matin` (06:00–11:59) et `après-midi` (12:00–17:59), fuseau `Europe/Paris` ;
+- avant `TARGET_DATE`, le job tourne toutes les heures et vérifie par anticipation la date cible (avant 12h: créneau matin, après 12h: créneau après-midi) ;
 - si précipitation horaire `>= 1 mm`, envoi d’un message WhatsApp via API Meta (Cloud API) ;
 - en cas d’échec WhatsApp, fallback immédiat par email via Resend ;
+- après `TARGET_DATE`, le job retourne `skip_out_of_target_date` ;
 - anti-duplication: clé d’idempotence interne par créneau (`meteo-alert/YYYY-MM-DD/{slot}`).
 
 ## Variables d’environnement

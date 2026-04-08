@@ -25,10 +25,15 @@ MIN_PRECIPITATION_THRESHOLD_MM = 1.0
 
 
 def resolve_slot(now_local: datetime, target_date: date) -> SlotName | None:
-    if now_local.date() != target_date:
+    if now_local.date() > target_date:
         return None
 
     hour = now_local.hour
+    if now_local.date() < target_date:
+        if hour < AFTERNOON_WINDOW.start_hour_inclusive:
+            return SlotName.MORNING
+        return SlotName.AFTERNOON
+
     if MORNING_WINDOW.start_hour_inclusive <= hour <= MORNING_WINDOW.end_hour_inclusive:
         return SlotName.MORNING
     if AFTERNOON_WINDOW.start_hour_inclusive <= hour <= AFTERNOON_WINDOW.end_hour_inclusive:

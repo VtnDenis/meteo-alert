@@ -37,10 +37,10 @@ def run_monitoring(config: AppConfig, now_utc: datetime | None = None) -> RunRes
     timezone_info = ZoneInfo(config.timezone_name)
     now_local = now.astimezone(timezone_info)
 
-    if now_local.date() != config.target_date:
+    if now_local.date() > config.target_date:
         return RunResult(
             status="skip_out_of_target_date",
-            detail="Current local date is outside TARGET_DATE.",
+            detail="Current local date is after TARGET_DATE.",
             slot=None,
             sent_email_id=None,
             sent_whatsapp_message_id=None,
