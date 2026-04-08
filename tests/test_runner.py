@@ -37,7 +37,7 @@ def test_run_monitoring_sends_whatsapp_when_rain_detected(monkeypatch: pytest.Mo
                 ForecastPoint(
                     forecast_time_utc=slot_hours_utc[0],
                     precipitation_mm=1.0,
-                    coverage_id="open-meteo:auto",
+                    coverage_id="open-meteo:best_match",
                     run_time_utc=datetime(2026, 4, 11, 5, 0, tzinfo=timezone.utc),
                 )
             ]
@@ -111,7 +111,7 @@ def test_run_monitoring_checks_target_date_before_it_happens(monkeypatch: pytest
                 ForecastPoint(
                     forecast_time_utc=slot_hours_utc[0],
                     precipitation_mm=1.0,
-                    coverage_id="open-meteo:auto",
+                    coverage_id="open-meteo:best_match",
                     run_time_utc=datetime(2026, 4, 10, 0, 0, tzinfo=timezone.utc),
                 )
             ]
@@ -186,7 +186,7 @@ def test_run_monitoring_falls_back_to_email_when_whatsapp_fails(monkeypatch: pyt
                 ForecastPoint(
                     forecast_time_utc=slot_hours_utc[0],
                     precipitation_mm=1.2,
-                    coverage_id="open-meteo:auto",
+                    coverage_id="open-meteo:best_match",
                     run_time_utc=datetime(2026, 4, 11, 5, 0, tzinfo=timezone.utc),
                 )
             ]
@@ -260,7 +260,7 @@ def test_run_monitoring_skips_when_no_rain(monkeypatch: pytest.MonkeyPatch) -> N
                 ForecastPoint(
                     forecast_time_utc=slot_hours_utc[0],
                     precipitation_mm=0.0,
-                    coverage_id="open-meteo:auto",
+                    coverage_id="open-meteo:best_match",
                     run_time_utc=datetime(2026, 4, 11, 5, 0, tzinfo=timezone.utc),
                 )
             ]

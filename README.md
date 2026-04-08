@@ -16,7 +16,7 @@ Règle d’alerte:
 Copier `.env.example` vers `.env`, puis renseigner:
 
 - `OPEN_METEO_BASE_URL` (optionnel, défaut: `https://api.open-meteo.com/v1/forecast`)
-- `OPEN_METEO_MODEL` (optionnel, défaut: `auto`)
+- `OPEN_METEO_MODEL` (optionnel, défaut: `best_match`)
 - `OPEN_METEO_TIMEOUT_SECONDS` (optionnel, défaut: `30`)
 - `RESEND_API_KEY`
 - `RESEND_FROM`

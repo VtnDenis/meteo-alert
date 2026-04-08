@@ -32,7 +32,7 @@ jobs:
       - name: Run weather alert monitor
         env:
           OPEN_METEO_BASE_URL: https://api.open-meteo.com/v1/forecast
-          OPEN_METEO_MODEL: auto
+          OPEN_METEO_MODEL: best_match
           OPEN_METEO_TIMEOUT_SECONDS: "30"
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}

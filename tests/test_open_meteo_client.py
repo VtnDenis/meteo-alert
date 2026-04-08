@@ -73,13 +73,13 @@ def test_fetch_slot_precipitations_maps_requested_hours(monkeypatch: pytest.Monk
 
     assert captured_params["hourly"] == "precipitation"
     assert captured_params["timezone"] == "GMT"
-    assert captured_params["models"] == "auto"
+    assert captured_params["models"] == "best_match"
     assert captured_params["precipitation_unit"] == "mm"
 
     assert len(points) == 2
     assert points[0].precipitation_mm == 1.25
     assert points[1].precipitation_mm == 0.5
-    assert points[0].coverage_id == "open-meteo:auto"
+    assert points[0].coverage_id == "open-meteo:best_match"
     assert points[0].run_time_utc.tzinfo is timezone.utc
     assert points[1].run_time_utc == points[0].run_time_utc
 

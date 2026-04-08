@@ -6,7 +6,7 @@ import os
 from typing import Mapping
 
 DEFAULT_OPEN_METEO_BASE_URL = "https://api.open-meteo.com/v1/forecast"
-DEFAULT_OPEN_METEO_MODEL = "auto"
+DEFAULT_OPEN_METEO_MODEL = "best_match"
 DEFAULT_TARGET_DATE = "2026-04-11"
 DEFAULT_TARGET_TIMEZONE = "Europe/Paris"
 DEFAULT_TARGET_LAT = "45.470463"
@@ -56,7 +56,9 @@ class AppConfig:
         if not open_meteo_base_url.startswith("https://"):
             errors.append("OPEN_METEO_BASE_URL must start with https://")
 
-        open_meteo_model = _none_if_blank(env.get("OPEN_METEO_MODEL")) or DEFAULT_OPEN_METEO_MODEL
+        open_meteo_model = _normalize_open_meteo_model(
+            _none_if_blank(env.get("OPEN_METEO_MODEL")) or DEFAULT_OPEN_METEO_MODEL
+        )
 
         open_meteo_timeout_seconds = _parse_float(
             name="OPEN_METEO_TIMEOUT_SECONDS",
@@ -177,6 +179,12 @@ def _none_if_blank(value: str | None) -> str | None:
         return None
     stripped = value.strip()
     return stripped if stripped else None
+
+
+def _normalize_open_meteo_model(value: str) -> str:
+    if value.lower() == "auto":
+        return "best_match"
+    return value
 
 
 def _require_non_blank(env: Mapping[str, str], key: str, errors: list[str]) -> str:
