@@ -12,6 +12,9 @@ def _base_env() -> dict[str, str]:
         "OPEN_METEO_MODEL": "auto",
         "RESEND_API_KEY": "dummy",
         "RESEND_FROM": "alerts@example.com",
+        "WHATSAPP_ACCESS_TOKEN": "token_123",
+        "WHATSAPP_PHONE_NUMBER_ID": "1906385232743451",
+        "WHATSAPP_BUSINESS_ACCOUNT_ID": "104996122399160",
     }
 
 
@@ -32,5 +35,12 @@ def test_from_mapping_fails_with_invalid_open_meteo_url() -> None:
 def test_from_mapping_fails_with_invalid_coordinates() -> None:
     env = _base_env()
     env["TARGET_LAT"] = "200"
+    with pytest.raises(ValueError):
+        AppConfig.from_mapping(env)
+
+
+def test_from_mapping_fails_with_invalid_whatsapp_recipient() -> None:
+    env = _base_env()
+    env["WHATSAPP_RECIPIENT_NUMBER"] = "0624018317"
     with pytest.raises(ValueError):
         AppConfig.from_mapping(env)

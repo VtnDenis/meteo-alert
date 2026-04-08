@@ -37,6 +37,14 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}
           ALERT_EMAIL_TO: vtndenis@gmail.com
+          WHATSAPP_ACCESS_TOKEN: ${{ secrets.WHATSAPP_ACCESS_TOKEN }}
+          WHATSAPP_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_PHONE_NUMBER_ID }}
+          WHATSAPP_BUSINESS_ACCOUNT_ID: ${{ secrets.WHATSAPP_BUSINESS_ACCOUNT_ID }}
+          WHATSAPP_RECIPIENT_NUMBER: "+33624018317"
+          WHATSAPP_GRAPH_API_VERSION: "v25.0"
+          WHATSAPP_TEMPLATE_NAME: "meteo_alerte_pluie_resume_v1"
+          WHATSAPP_TEMPLATE_LANGUAGE: "fr_FR"
+          WHATSAPP_TIMEOUT_SECONDS: "20"
           TARGET_DATE: 2026-04-11
           TARGET_TIMEZONE: Europe/Paris
           TARGET_LAT: "45.470463"

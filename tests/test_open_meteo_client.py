@@ -24,6 +24,9 @@ def _base_env() -> dict[str, str]:
     return {
         "RESEND_API_KEY": "dummy",
         "RESEND_FROM": "alerts@example.com",
+        "WHATSAPP_ACCESS_TOKEN": "token_123",
+        "WHATSAPP_PHONE_NUMBER_ID": "1906385232743451",
+        "WHATSAPP_BUSINESS_ACCOUNT_ID": "104996122399160",
     }
 
 

@@ -37,8 +37,9 @@ def test_slot_hours_utc_returns_6_hours_per_slot() -> None:
 
 
 def test_is_rainy() -> None:
-    assert is_rainy([0.0, 0.01, 0.0])
-    assert not is_rainy([0.0, 0.0])
+    assert is_rainy([0.0, 1.0, 0.0])
+    assert is_rainy([1.2])
+    assert not is_rainy([0.0, 0.99, 0.0])
 
 
 def test_build_idempotency_key() -> None:

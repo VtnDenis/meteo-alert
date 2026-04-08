@@ -21,6 +21,7 @@ class SlotWindow:
 
 MORNING_WINDOW = SlotWindow(name=SlotName.MORNING, start_hour_inclusive=6, end_hour_inclusive=11)
 AFTERNOON_WINDOW = SlotWindow(name=SlotName.AFTERNOON, start_hour_inclusive=12, end_hour_inclusive=17)
+MIN_PRECIPITATION_THRESHOLD_MM = 1.0
 
 
 def resolve_slot(now_local: datetime, target_date: date) -> SlotName | None:
@@ -56,10 +57,13 @@ def slot_hours_utc(target_date: date, slot: SlotName, timezone_info: ZoneInfo) -
     return [hour_local.astimezone(timezone.utc) for hour_local in slot_hours_local(target_date, slot, timezone_info)]
 
 
-def is_rainy(precipitation_mm: Sequence[float], threshold_mm: float = 0.0) -> bool:
+def is_rainy(
+    precipitation_mm: Sequence[float],
+    threshold_mm: float = MIN_PRECIPITATION_THRESHOLD_MM,
+) -> bool:
     if threshold_mm < 0:
         raise ValueError("threshold_mm must be >= 0.")
-    return any(value > threshold_mm for value in precipitation_mm)
+    return any(value >= threshold_mm for value in precipitation_mm)
 
 
 def build_idempotency_key(target_date: date, slot: SlotName) -> str:
